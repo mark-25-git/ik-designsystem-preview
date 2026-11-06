@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storefront styles</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./assets/c7dc62c3c1de636688011c16dfb64239.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&amp;family=Libre+Franklin:wght@400;500;600&amp;family=Cormorant+Garamond:wght@500;600&amp;family=Proza+Libre:wght@400;500;600&amp;family=DM+Serif+Display&amp;family=DM+Sans:wght@400;500;600&amp;display=swap">
+<style>
+body { margin: 0; background: #EFE9DD; }
+.tc-layout {
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  gap: 24px;
+  box-sizing: border-box;
+  height: 100dvh;
+  padding: 20px;
+  color: #25221D;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.tc-controls, .tc-preview { min-height: 0; overflow: auto; }
+.tc-controls { padding: 4px; }
+.tc-controls h1 { margin: 0 0 20px; font-size: 24px; letter-spacing: -0.03em; }
+.tc-controls h2 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+.tc-controls section + section { margin-top: 16px; }
+.tc-options { display: grid; gap: 6px; }
+.tc-palettes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tc-pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: #F7F2E8;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: left;
+}
+.tc-pick:hover, .tc-pick[aria-pressed="true"] { background: #FFF; }
+.tc-pick[aria-pressed="true"] { border-color: #25221D; }
+.tc-pick:focus-visible { outline: 2px solid #76531F; outline-offset: 2px; }
+.tc-palettes .tc-pick { flex-direction: column; align-items: stretch; gap: 5px; }
+.tc-swatch { display: flex; height: 14px; border-radius: 4px; overflow: hidden; }
+.tc-preview { display: flex; flex-direction: column; overflow: visible; }
+.tc-preview h2 { margin: 4px 0 10px; font-size: 14px; font-weight: 600; }
+.tc-preview-scroll {
+  min-height: 0;
+  overflow: auto;
+  border-radius: 16px;
+}
+.tc-preview-fit { container-type: inline-size; }
+.tc-storefront {
+  width: 1160px;
+  zoom: min(1, calc(100cqw / 1160px));
+  margin-inline: auto;
+}
+.tc-preview-scroll:focus-visible { outline: 2px solid #76531F; outline-offset: 2px; }
+
+@media (max-width: 820px) {
+  .tc-layout { height: auto; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 12px; }
+  .tc-preview-scroll { max-height: 75dvh; }
+}
+</style>
+</helmet>
+<main class="tc-layout">
+  <aside class="tc-controls" aria-labelledby="tc-title">
+    <h1 id="tc-title">Storefront styles</h1>
+
+    <section aria-labelledby="type-h">
+      <h2 id="type-h">Typography</h2>
+      <div class="tc-options" role="group" aria-labelledby="type-h">
+        <sc-for list="{{ typeTiles }}" as="t" hint-placeholder-count="3">
+          <button type="button" class="tc-pick" aria-pressed="{{ t.checked }}" onClick="{{ t.pick }}">
+            <span aria-hidden="true" style="font-family: {{ t.display }}; font-weight: {{ t.dw }}; font-size: 26px; line-height: 1; letter-spacing: {{ t.dls }}">Aa</span>
+            <span>{{ t.name }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-labelledby="pal-h">
+      <h2 id="pal-h">Palette</h2>
+      <div class="tc-options tc-palettes" role="group" aria-labelledby="pal-h">
+        <sc-for list="{{ palTiles }}" as="p" hint-placeholder-count="4">
+          <button type="button" class="tc-pick" aria-pressed="{{ p.checked }}" onClick="{{ p.pick }}">
+            <span class="tc-swatch" aria-hidden="true">
+              <span style="flex: 3; background: {{ p.c1 }}"></span><span style="flex: 1; background: {{ p.c2 }}"></span><span style="flex: 2; background: {{ p.c3 }}"></span><span style="flex: 1; background: {{ p.c4 }}"></span>
+            </span>
+            <span>{{ p.name }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+  </aside>
+
+  <section class="tc-preview" aria-labelledby="preview-h">
+    <h2 id="preview-h">Storefront preview</h2>
+    <div class="tc-preview-scroll" role="region" aria-labelledby="preview-h" tabindex="0">
+      <div class="tc-preview-fit">
+        <div class="tc-storefront {{ themeCls }}" style="border-radius: 16px; overflow: hidden; background: var(--ik-paper); color: var(--ik-ink)">
+          <div style="display: flex; align-items: center; gap: 32px; height: 76px; padding: 0 40px; border-bottom: 1px solid var(--ik-line); font-family: {{ sel.body }}">
+            <span style="display: flex; align-items: center; gap: 12px"><img src="./assets/c1f94048e3d9a381dcf6b83dd123eeb4.png" alt="" width="48" height="48" style="display: block"><span style="font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.logo }}px; letter-spacing: {{ sel.dls }}">Idea Kreatif</span></span>
+            <span style="flex: 0 1 340px; height: 40px; border: 1px solid var(--ik-field); border-radius: 8px; background: #FFFFFF; display: flex; align-items: center; padding: 0 14px; font-size: 15px; color: var(--ik-muted)">Title or author</span>
+            <span style="margin-left: auto; display: flex; gap: 28px; font-size: 15px; color: var(--ik-text2)"><span>Home</span><span style="position: relative; color: var(--ik-ink); font-weight: 500"><span class="ik-ribbon" style="top: -29px; left: calc(50% - 5px)"></span>Catalog</span><span>Newsletter</span><span>Store Location</span><span style="color: var(--ik-ink)">Cart 2</span></span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 48px; align-items: center; padding: 72px 40px">
+            <div style="display: flex; flex-direction: column; gap: 20px">
+              <p style="margin: 0; font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.hero }}px; line-height: {{ sel.dlh }}; letter-spacing: {{ sel.dls }}; white-space: pre-line">Read. Dream.
+Be inspired.</p>
+              <p style="margin: 0; max-width: 420px; font-family: {{ sel.body }}; font-size: 18px; line-height: 28px; color: var(--ik-text2)">New novels from Idea Kreatif Publication, online and at our bookstore in Kajang</p>
+              <span style="align-self: flex-start; display: inline-flex; align-items: center; height: 48px; padding: 0 24px; border-radius: 8px; background: var(--ik-action); color: #FFFFFF; font-family: {{ sel.body }}; font-size: 16px; font-weight: 500">Shop New Releases</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 28px; padding: 32px; border-radius: 16px; background: var(--ik-feature); color: var(--ik-feature-text)">
+              <div style="width: 150px; flex: none; aspect-ratio: 2 / 3; background: #9A4A2F; color: #FFF4E8; border-radius: 2px 4px 4px 2px; box-shadow: 0 24px 32px -16px rgba(0,0,0,.6); transform: rotate(-3deg); padding: 16px 14px; display: flex; flex-direction: column; justify-content: space-between">
+                <span style="font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.cover }}px; line-height: 1.05; letter-spacing: {{ sel.dls }}">Hujan Pertama di Temerloh</span>
+                <span style="font-family: {{ sel.body }}; font-size: 10px; opacity: .85">Aina Rahman</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px">
+                <span style="font-family: {{ sel.body }}; font-size: 14px; color: var(--ik-feature-text2)">New from Aina Rahman</span>
+                <span style="font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.h3 }}px; line-height: 1.08; letter-spacing: {{ sel.dls }}">Hujan Pertama di Temerloh</span>
+                <span style="font-family: {{ sel.body }}; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--ik-feature-underline)">View the book</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 56px; padding: 0 40px 64px">
+            <div style="display: flex; flex-direction: column; gap: 24px">
+              <div style="display: flex; align-items: baseline; justify-content: space-between">
+                <p style="margin: 0; font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.h2 }}px; line-height: 1.1; letter-spacing: {{ sel.dls }}">New Releases</p>
+                <span style="font-family: {{ sel.body }}; font-size: 15px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--ik-underline)">View all</span>
+              </div>
+              <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
+                <sc-for list="{{ books }}" as="b" hint-placeholder-count="3">
+                  <div style="display: flex; flex-direction: column; gap: 10px; font-family: {{ sel.body }}">
+                    <div style="aspect-ratio: 2 / 3; background: var(--ik-raised); border-radius: 4px; display: flex; align-items: center; justify-content: center">
+                      <div style="height: 84%; aspect-ratio: 2 / 3; background: {{ b.bg }}; border-radius: 1px 3px 3px 1px; box-shadow: 0 10px 16px -10px rgba(37,34,29,.5)"></div>
+                    </div>
+                    <p style="margin: 0; font-size: 15px; line-height: 22px; font-weight: 500">{{ b.title }}</p>
+                    <p style="margin: -6px 0 0; font-size: 14px; line-height: 20px; color: var(--ik-text2)">{{ b.author }}</p>
+                    <p style="margin: 0; font-size: 15px; font-variant-numeric: tabular-nums">{{ b.price }}</p>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 8px">
+              <p style="margin: 0; font-family: {{ sel.display }}; font-weight: {{ sel.dw }}; font-size: {{ sz.h3 }}px; line-height: 1.15; letter-spacing: {{ sel.dls }}">The Quiet Year Between Us</p>
+              <p style="margin: 0; font-family: {{ sel.body }}; font-size: 26px; font-weight: 500; font-variant-numeric: tabular-nums">RM 42.00</p>
+              <p style="margin: 0; font-family: {{ sel.reading }}; font-size: 17px; line-height: 28px">Two old schoolmates take the same morning bus out of Kajang for a whole year without speaking. By the time one of them finally says hello, the route is about to be cancelled.</p>
+              <p style="margin: 0; font-family: {{ sel.body }}; font-size: 13px; line-height: 20px; color: var(--ik-text2)">Kisah Seorang Pengembara yang Mencari Jalan Pulang ke Kampung Halamannya, 0123456789</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1366,"height":768}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { type: 0, pal: 0 };
+  }
+  renderVals() {
+    const TYPES = [
+      { name: 'Libre Baskerville + Libre Franklin', display: "'Libre Baskerville', serif", dw: 400, dls: '-0.02em', dlh: '1.08', scale: 0.82, body: "'Libre Franklin', sans-serif", reading: "'Libre Baskerville', serif" },
+      { name: 'Cormorant Garamond + Proza Libre', display: "'Cormorant Garamond', serif", dw: 600, dls: '-0.015em', dlh: '0.98', scale: 1.08, body: "'Proza Libre', sans-serif", reading: "'Proza Libre', sans-serif" },
+      { name: 'DM Serif Display + DM Sans', display: "'DM Serif Display', serif", dw: 400, dls: '-0.015em', dlh: '1.0', scale: 0.95, body: "'DM Sans', sans-serif", reading: "'DM Sans', sans-serif" }
+    ];
+    const PALS = [
+      { id: 'customer', cls: 'ik', name: 'Customer brief', c1: '#FAF7EF', c2: '#B58A46', c3: '#25221D', c4: '#F3EBDD' },
+      { id: 'songket', cls: 'ik ik-theme-songket', name: 'Songket', c1: '#3A1620', c2: '#B8873A', c3: '#FCFBF8', c4: '#1E1714' },
+      { id: 'navy', cls: 'ik ik-theme-navy', name: 'Ink and gilt', c1: '#16223A', c2: '#B8873A', c3: '#FBFBF9', c4: '#141B2B' },
+      { id: 'cloth', cls: 'ik ik-theme-cloth', name: 'Bookcloth', c1: '#1C3B30', c2: '#B8873A', c3: '#FBFAF6', c4: '#17201B' }
+    ];
+    const s = TYPES[this.state.type];
+    const p = PALS[this.state.pal];
+    const k = s.scale;
+    return {
+      sel: s, themeCls: p.cls,
+      sz: { hero: Math.round(80 * k), h2: Math.round(40 * k), h3: Math.round(30 * k), cover: Math.round(19 * k), logo: Math.round(22 * Math.min(1.05, k + 0.1)) },
+      books: [
+        { title: 'Kopi, Kertas & Kenangan', author: 'Hafiz Zainal', price: 'RM 32.00', bg: '#5B3A5E' },
+        { title: 'Letters to a Riverside Town', author: 'Mei Ling Tan', price: 'RM 38.00', bg: '#2C3E63' },
+        { title: 'Sebelum Senja Berlalu', author: 'Nurul Huda', price: 'RM 33.00', bg: '#B58A46' }
+      ],
+      typeTiles: TYPES.map((t, j) => ({
+        name: t.name, display: t.display, dw: t.dw, dls: t.dls,
+        checked: j === this.state.type ? 'true' : 'false',
+        bg: j === this.state.type ? '#FFFFFF' : '#F7F2E8',
+        border: j === this.state.type ? '#25221D' : 'transparent',
+        pick: () => this.setState({ type: j })
+      })),
+      palTiles: PALS.map((q, j) => ({
+        name: q.name, c1: q.c1, c2: q.c2, c3: q.c3, c4: q.c4,
+        checked: j === this.state.pal ? 'true' : 'false',
+        bg: j === this.state.pal ? '#FFFFFF' : '#F7F2E8',
+        border: j === this.state.pal ? '#25221D' : 'transparent',
+        pick: () => this.setState({ pal: j })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
